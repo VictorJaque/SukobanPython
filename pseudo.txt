@@ -1,0 +1,6 @@
+Välja en spelplan
+Ladda in spelplan
+Visa spelplan
+Få spelare att röra sig
+Få lådorna att röra sig
+Ge ett meddelande när alla lådor är rätt 

@@ -1,0 +1,144 @@
+def find_player(displaylevel):
+    """
+This function will find your player on the board
+    """
+    a = 0
+    for i in displaylevel:
+     if displaylevel[a] == "@":
+      player = a
+      break
+     a = a + 1
+    return(a)
+
+def move_up(displaylevel): #Moves your player up 1 step
+     a = find_player(displaylevel)
+     if displaylevel[a - 20] == "o" or displaylevel[a - 20] == "+":
+      if displaylevel[a - 40] == " ":
+                 displaylevel[a - 20] = "@"
+                 displaylevel[a] = " "
+                 displaylevel[a - 40] = "o"
+      elif displaylevel[a - 40] == ".":
+                 displaylevel[a - 40] = "+"
+                 displaylevel[a] = " "
+                 displaylevel[a - 20] = "@"
+     elif displaylevel[a - 20] == " " or ".":
+             displaylevel[a - 20] = "@"
+             displaylevel[a] = " "
+     return(displaylevel)
+
+def move_left(displaylevel): #Moves your player left one step
+     a = find_player(displaylevel)
+     if displaylevel[a - 1] == "o" or displaylevel[a - 1] == "+":
+      if displaylevel[a - 2] == " ":
+                 displaylevel[a - 1] = "@"
+                 displaylevel[a] = " "
+                 displaylevel[a - 2] = "o"
+      elif displaylevel[a - 2] == ".":
+                 displaylevel[a - 2] = "+"
+                 displaylevel[a] = " "
+                 displaylevel[a - 1] = "@"
+     elif displaylevel[a - 1] == " " or ".":
+             displaylevel[a - 1] = "@"
+             displaylevel[a] = " "
+     return(displaylevel)
+             
+def move_down(displaylevel): #Moves your player down one step
+     a = find_player(displaylevel)
+     if displaylevel[a + 20] == "o" or displaylevel[a + 20] == "+":
+      if displaylevel[a + 40] == " ":
+                 displaylevel[a + 20] = "@"
+                 displaylevel[a] = " "
+                 displaylevel[a + 40] = "o"
+      elif displaylevel[a + 40] == ".":
+                 displaylevel[a + 40] = "+"
+                 displaylevel[a] = " "
+                 displaylevel[a + 20] = "@"
+     elif displaylevel[a + 20] == " " or ".":
+             displaylevel[a + 20] = "@"
+             displaylevel[a] = " "
+     return(displaylevel)
+
+def move_right(displaylevel): #Moves your player right one step 
+     a = find_player(displaylevel)
+     if displaylevel[a + 1] == "o" or displaylevel[a + 1] == "+":
+      if displaylevel[a + 2] == " ":
+                 displaylevel[a + 1] = "@"
+                 displaylevel[a] = " "
+                 displaylevel[a + 2] = "o"
+      elif displaylevel[a + 2] == ".":
+                 displaylevel[a + 2] = "+"
+                 displaylevel[a] = " "
+                 displaylevel[a + 1] = "@"
+     elif displaylevel[a + 1] == " " or ".":
+             displaylevel[a + 1] = "@"
+             displaylevel[a] = " "
+     return(displaylevel)
+
+def can_move(move, displaylevel): #Checks if your player can move or not
+    a = find_player(displaylevel)
+    if move == "w":
+         if displaylevel[a - 20] == "#":
+             print("There's a Trump wall in the way, try again")
+             return(False)
+         elif displaylevel[a - 20] == "o" or displaylevel[a - 20] == "+":
+            if displaylevel[a - 40] == "o":
+              print("There's an object in the way, try again")
+              return(False)
+            if displaylevel[a - 40] == "#":
+              print("There's a Trump wall in the way, try again")
+              return(False)
+    elif move == "d":
+        if displaylevel[a + 1] == "#":
+          print("There's a Trump  wall in the way, try again")
+          return(False)
+        elif displaylevel[a + 1] == "o" or displaylevel[a + 1] == "+":
+          if displaylevel[a + 2] == "o":
+            print("There's an object in the way, try again")
+            return(False)
+          elif displaylevel[a + 2] == "#":
+            print("There's a Trump wall in the way, try again")
+            return(False)
+    elif move == "a":
+        if displaylevel[a - 1] == "#":
+             print("There's a Trump wall in the way, try again")
+             return(False)
+        elif displaylevel[a - 1] == "o" or displaylevel[a - 1] == "+":
+          if displaylevel[a - 2] == "o":
+            print("There's an object in the way, try again")
+            return(False)
+          if displaylevel[a - 2] == "#":
+              print("There's a Trump wall in the way, try again")
+              return(False)
+    elif move == "s":
+        if displaylevel[a + 20] == "#":
+             print("There's a wall in the way, try again")
+             return(False)
+        elif displaylevel[a + 20] == "o" or displaylevel[a + 20] == "+":
+          if displaylevel[a + 40] == "o":
+            print("There's an object in the way, try again")
+            return(False)
+          if displaylevel[a + 40] == "#":
+              print("There's a Trump wall in the way, try again")
+              return(False)
+    
+def move_player(level, displaylevel):
+     """
+Function that will go through can_move and will let you move thereafter
+     """
+     move = input("Which direction do you want to go? Up(w), Down(s), Left(a) or Right(d)? ")
+     d = can_move(move, displaylevel)
+     if d == False:
+            return(displaylevel)
+     elif d == None:
+           if move == "w":# UPP
+                return(move_up(displaylevel))
+           elif move == "d": #d HÖGER
+                return(move_right(displaylevel))
+           elif move == "a": #a VÄNSTER
+                return(move_left(displaylevel))
+           elif move == "s": #s NER
+                return(move_down(displaylevel))
+           else:
+                return(displaylevel)
+     else:
+           return(displaylevel)
